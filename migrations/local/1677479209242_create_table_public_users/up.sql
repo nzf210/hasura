@@ -1,0 +1,1 @@
+CREATE TABLE "public"."users" ("id" text NOT NULL, "first_name" bpchar NOT NULL, "last_name" bpchar, "level" bpchar NOT NULL DEFAULT 'support', "is_active" boolean NOT NULL DEFAULT false, "area" bpchar, PRIMARY KEY ("id") , UNIQUE ("id"));
