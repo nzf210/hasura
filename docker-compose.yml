@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.8'
 services:
   postgres:
     image: postgres:13
@@ -7,6 +7,16 @@ services:
     - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+    ports:
+    - 5432:5432
+    deploy:
+        resources:
+            limits:
+              cpus: "2"
+              memory: 1GB
+            reservations:
+              cpus: "2"
+              memory: 1GB
   graphql-engine:
     image: hasura/graphql-engine:v2.19.0
     ports:
@@ -29,6 +39,8 @@ services:
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       HASURA_NESTJS_WEBHOOK_HEADER_VALUE: 'this-is-the-secret'
+      HASURA_NESTJS_WEBHOOK: 'http://localhost:3001'
+
 volumes:
   db_data:
 

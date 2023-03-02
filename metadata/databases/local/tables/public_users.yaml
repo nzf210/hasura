@@ -1,3 +1,26 @@
 table:
   name: users
   schema: public
+event_triggers:
+  - name: xxx
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: http://localhost:3001
+    request_transform:
+      body:
+        action: remove
+      method: GET
+      query_params: {}
+      request_headers:
+        add_headers: {}
+        remove_headers:
+          - content-type
+      template_engine: Kriti
+      url: '{{$base_url}}/v1'
+      version: 2
